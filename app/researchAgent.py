@@ -11,6 +11,7 @@ class ResearchAgent:
 
     def update_context(self, role, content):
         self.context.append({"role": role, "content": content})
+
     def research (self, query):
         self.context = []
         self.update_context("user", f"The question: {query}")
@@ -57,17 +58,7 @@ class ResearchAgent:
         print("Context updated with web search results. Now synthesizing the final answer")
 
         synthesis_prompt = f"""
-        Based on the full conversation context below, your final step is to create and generate a **5-paragraph essay** that fully addresses the user's original query.
-
-        The essay MUST follow this structure exactly:
-        1. Introduction (1 paragraph)
-        2. Body Paragraph 1 (1 paragraph, utilizing the sources)
-        3. Body Paragraph 2 (1 paragraph, utilizing the sources)
-        4. Body Paragraph 3 (1 paragraph, utilizing the sources)
-        5. Conclusion (1 paragraph)
-
-        Crucially, ensure the entire 5-paragraph essay is completed before proceeding to the citations.
-
+        Based on the full conversation context below, your final step is to create and generate a summary of the context. 
         FULL CONTEXT:
         {self.context}
 
